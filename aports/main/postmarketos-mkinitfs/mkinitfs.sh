@@ -97,6 +97,7 @@ BINARIES_EXTRA="
 	/usr/lib/libts*
 	$(find /usr/lib/directfb-* -name '*.so')
 	/lib/libz.so.1
+	/sbin/lvm
 "
 get_binaries()
 {
