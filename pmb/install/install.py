@@ -104,16 +104,16 @@ def copy_files_other(args):
     homedir = rootfs + "/home/" + args.user
     pmb.helpers.run.root(args, ["mkdir", rootfs + "/home"])
     pmb.helpers.run.root(args, ["cp", "-a", rootfs + "/etc/skel", homedir])
-    pmb.helpers.run.root(args, ["chown", "-R", "1000", homedir])
+    pmb.helpers.run.root(args, ["chown", "-R", "100000", homedir])
 
 
 def set_user(args):
     """
-    Create user with UID 1000 if it doesn't exist
+    Create user with UID 100000 if it doesn't exist
     """
     suffix = "rootfs_" + args.device
     if not pmb.chroot.user_exists(args, args.user, suffix):
-        pmb.chroot.root(args, ["adduser", "-D", "-u", "1000", args.user],
+        pmb.chroot.root(args, ["adduser", "-D", "-u", "100000", args.user],
                         suffix)
         pmb.chroot.root(args, ["addgroup", args.user, "wheel"], suffix)
 
@@ -169,7 +169,7 @@ def copy_ssh_key(args):
     pmb.helpers.run.root(args, ["chmod", "700", target])
     pmb.helpers.run.root(args, ["cp", authorized_keys, target + "/authorized_keys"])
     pmb.helpers.run.root(args, ["rm", authorized_keys])
-    pmb.helpers.run.root(args, ["chown", "-R", "1000:1000", target])
+    pmb.helpers.run.root(args, ["chown", "-R", "100000:100000", target])
 
 
 def setup_keymap(args):
