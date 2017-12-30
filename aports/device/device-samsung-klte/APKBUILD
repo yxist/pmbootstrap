@@ -1,0 +1,17 @@
+pkgname="device-samsung-klte"
+pkgdesc="Samsung Galaxy S5"
+pkgver=0.1
+pkgrel=0
+url="https://postmarketos.org"
+license="MIT"
+arch="noarch"
+options="!check"
+depends="linux-samsung-klte mkbootimg"
+source="deviceinfo"
+
+package() {
+	install -Dm644 "$srcdir"/deviceinfo \
+		"$pkgdir"/etc/deviceinfo
+}
+
+sha512sums="4b9d11a1fa75850dd332ae63096374a1ae7ef24459b813d9fa493b75a2987ed4b946a32b38378932e5295db016cbf8ff5baa59f4a10b795d24e0b7c4e084df84  deviceinfo"
