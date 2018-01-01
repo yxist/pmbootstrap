@@ -1,0 +1,13 @@
+diff --git a/drivers/video/msm/mdss/mdss_fb.c b/drivers/video/msm/mdss/mdss_fb.c
+index 2fbfe4d..a124445 100644
+--- a/drivers/video/msm/mdss/mdss_fb.c
++++ b/drivers/video/msm/mdss/mdss_fb.c
+@@ -1667,7 +1667,7 @@ static int mdss_fb_alloc_fbmem_iommu(struct msm_fb_data_type *mfd, int dom)
+ 					boot_mode_lpm, boot_mode_recovery);
+ 
+ 	/* Incase of Normal Booting, Do not reserve FB memory */
+-	if ((!boot_mode_lpm) && (!boot_mode_recovery)){
++	if (false) {
+ 		/* Normal Booting */
+ 		mfd->fbi->screen_base = NULL;
+ 		mfd->fbi->fix.smem_start = 0;

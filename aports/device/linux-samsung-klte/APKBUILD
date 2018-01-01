@@ -22,6 +22,7 @@ source="
 	$pkgname-$_commit.tar.gz::https://github.com/SmartPack/${_repository}/archive/${_tag}.tar.gz
 	$_config
 	compiler-gcc6.h
+	00_reserve_fb_memory_on_normal_boot.patch
 "
 builddir="$srcdir/${_repository}-5"
 
@@ -82,5 +83,6 @@ package() {
 }
 
 sha512sums="442a2d25135a80c433db5c91578953eedd5afb38effe6221185afd7f9643e00423570b428408b00e9ae52dadc9f0c747691084734f8428f570cf7c5f3b8d0875  linux-samsung-klte-.tar.gz
-ca45384d563673cb172f1c7d32d9d8240a3cda1f6df32064dc5ee8a4a7be33c3fd1d4a7d4288588c5c6bdcae258a48a4b4333ce6ace848279da324ad59f0751d  config-samsung-klte.armhf
-d80980e9474c82ba0ef1a6903b434d8bd1b092c40367ba543e72d2c119301c8b2d05265740e4104ca1ac5d15f6c4aa49e8776cb44264a9a28dc551e0d1850dcc  compiler-gcc6.h"
+b3a1551b68f88a9916ac493d5d657ac9f4fd1641392f1202068168ebd8267f789514015a7a1dc00410293bf7facef2014c3cfdf23001ca3530ebc643f718e95f  config-samsung-klte.armhf
+d80980e9474c82ba0ef1a6903b434d8bd1b092c40367ba543e72d2c119301c8b2d05265740e4104ca1ac5d15f6c4aa49e8776cb44264a9a28dc551e0d1850dcc  compiler-gcc6.h
+39fcb2a67aa40950333aecf090e2db230565cdcc34ff38b533a1dd6e5c594964c382b220a889e58a64e2669004a5012be623ec730296fcb770984aede1e9883e  00_reserve_fb_memory_on_normal_boot.patch"
