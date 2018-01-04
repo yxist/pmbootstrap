@@ -1,0 +1,25 @@
+pkgname=charging-sdl
+pkgver=0.1
+pkgrel=0
+pkgdesc="SDL2 charging application for the initramfs"
+url="https://github.com/postmarketOS/charging-sdl"
+arch="all"
+license="GPL3"
+depends="sdl2 sdl2_ttf mesa-gl directfb"
+makedepends="linux-headers sdl2-dev sdl2_ttf-dev"
+subpackages=""
+_commit="21fd3b629ac32f01c25b0324fe0fb8840bdf5864"
+source="${pkgname}-${_commit}.tar.gz::https://github.com/postmarketOS/charging-sdl/archive/${_commit}.tar.gz"
+options="!strip"
+builddir="${srcdir}/${pkgname}-${_commit}"
+
+build() {
+	make
+}
+
+package() {
+	install -D -m755 "${builddir}"/charging_sdl \
+		"$pkgdir"/usr/bin/charging-sdl
+}
+
+sha512sums="de290041972085bfdcec1a546c1de237de7f277195c2b4914eac24d21bef1aaad5b3d5c123c703c15fe0dac776d53039b28497aa0bd2cde3ead6eeb79742ed97  charging-sdl-21fd3b629ac32f01c25b0324fe0fb8840bdf5864.tar.gz"
