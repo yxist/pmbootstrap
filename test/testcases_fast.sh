@@ -14,7 +14,7 @@ disabled="
 cd "$(dirname "$0")/.."
 device="$(./pmbootstrap.py config device)"
 deviceinfo="$PWD/aports/device/device-$device/deviceinfo"
-if ! [ -e "./aports/device/device-$device/deviceinfo" ]; then
+if ! [ -e "$deviceinfo" ]; then
 	echo "ERROR: Could not find deviceinfo file for selected device '$device'."
 	echo "Expected path: $deviceinfo"
 	echo "Maybe you have switched to a branch where your device does not exist?"
