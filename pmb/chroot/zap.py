@@ -86,9 +86,12 @@ def zap(args, confirm=True, dry=False, packages=False, http=False,
     args.cache["apk_repository_list_updated"].clear()
 
     # Override "done" message with saved MB
-    size_new = pmb.helpers.other.folder_size(args, args.work)
-    mb = (size_old - size_new) / 1024 / 1024
-    logging.info("Cleared up ~" + str(math.ceil(mb)) + " MB of space")
+    if dry:
+        logging.info("Dry run: nothing has been deleted")
+    else:
+        size_new = pmb.helpers.other.folder_size(args, args.work)
+        mb = (size_old - size_new) / 1024 / 1024
+        logging.info("Cleared up ~" + str(math.ceil(mb)) + " MB of space")
     sys.exit(0)
 
 
@@ -144,13 +147,19 @@ def zap_mismatch_bins(args, confirm=True, dry=False):
 
 
 def zap_old_bins(args, confirm=True, dry=False):
+    # Check whether we need to do anything
+    paths = glob.glob(args.work + "/cache_apk_*")
+    if not len(paths):
+        return
     if confirm and not pmb.helpers.cli.confirm(args, "Remove outdated binary packages?"):
         return
-    arch_native = pmb.parse.arch.alpine_native()
-    if os.path.exists(args.work + "/cache_apk_" + arch_native):
-        pmb.chroot.root(args, ["apk", "-v", "cache", "clean"])
-    for arch in pmb.config.build_device_architectures:
-        if arch != arch_native and os.path.exists(args.work + "/cache_apk_" + arch):
-            logging.info("(buildroot_" + arch + ") apk -v cache clean")
-            if not dry:
-                pmb.chroot.root(args, ["apk", "-v", "cache", "clean"], "buildroot_" + arch)
+
+    # Iterate over existing apk caches
+    for path in paths:
+        arch = os.path.basename(path).split("_", 2)[2]
+        chroot = "native" if arch == args.arch_native else "buildroot_" + arch
+
+        # Clean the cache with apk
+        logging.info("(" + chroot + ") apk -v cache clean")
+        if not dry:
+            pmb.chroot.root(args, ["apk", "-v", "cache", "clean"], chroot)
