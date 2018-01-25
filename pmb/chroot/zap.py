@@ -45,9 +45,10 @@ def zap(args, confirm=True, dry=False, packages=False, http=False,
     and args.device set!
     """
     # Get current work folder size
-    pmb.chroot.shutdown(args)
-    logging.debug("Calculate work folder size")
-    size_old = pmb.helpers.other.folder_size(args, args.work)
+    if not dry:
+        pmb.chroot.shutdown(args)
+        logging.debug("Calculate work folder size")
+        size_old = pmb.helpers.other.folder_size(args, args.work)
 
     # Delete packages with a different version compared to aports, then re-index
     if mismatch_bins:
