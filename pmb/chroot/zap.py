@@ -20,7 +20,6 @@ import glob
 import logging
 import math
 import os
-import sys
 
 import pmb.chroot
 import pmb.helpers.run
@@ -86,14 +85,13 @@ def zap(args, confirm=True, dry=False, packages=False, http=False,
     # Chroots were zapped, so no repo lists exist anymore
     args.cache["apk_repository_list_updated"].clear()
 
-    # Override "done" message with saved MB
+    # Print amount of cleaned up space
     if dry:
         logging.info("Dry run: nothing has been deleted")
     else:
         size_new = pmb.helpers.other.folder_size(args, args.work)
         mb = (size_old - size_new) / 1024 / 1024
         logging.info("Cleared up ~" + str(math.ceil(mb)) + " MB of space")
-    sys.exit(0)
 
 
 def zap_mismatch_bins(args, confirm=True, dry=False):

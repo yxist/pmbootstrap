@@ -329,6 +329,9 @@ def zap(args):
                    mismatch_bins=args.mismatch_bins, old_bins=args.old_bins,
                    distfiles=args.distfiles)
 
+    # Don't write the "Done" message
+    pmb.helpers.logging.disable()
+
 
 def bootimg_analyze(args):
     bootimg = pmb.parse.bootimg(args, args.path)
