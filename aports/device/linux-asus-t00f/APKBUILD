@@ -22,9 +22,9 @@ source="
 	$pkgname-$_commit.tar.gz::https://github.com/zf5/${_repository}/archive/${_commit}.tar.gz
 	$_config
 	compiler-gcc6.h
-    01_ipc-shm-fix-redefinition-of-shm_rcu_free.patch
-    02_drivers-external_drivers-remove-unused-constants.patch
-    03_ipc-fix-undefined-references.patch
+	01_ipc-shm-fix-redefinition-of-shm_rcu_free.patch
+	02_drivers-external_drivers-remove-unused-constants.patch
+	03_ipc-fix-undefined-references.patch
 "
 builddir="$srcdir/${_repository}-${_commit}"
 
